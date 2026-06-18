@@ -326,7 +326,7 @@ func TestWriteOpinionatedHeaderNeedsObjc(t *testing.T) {
 func TestWriteOpinionatedHeaderWithExtraImport(t *testing.T) {
 	var buf bytes.Buffer
 	extraImports := map[string]string{
-		"foundation": "github.com/example/fw/frameworks/foundation",
+		"foundation": "github.com/example/fw/bindings/frameworks/foundation",
 	}
 	writeOpinionatedHeader(&buf, "mylib", "github.com/example/fw/mylib", extraImports, nil, false)
 	out := buf.String()

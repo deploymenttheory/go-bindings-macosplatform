@@ -25,7 +25,22 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 	usedImports := make(typemap.ImportSet)
 	ctx := m.BaseContext(framework.Framework, knownClasses)
 
-	// Build a set of Go type names to detect name collisions with package-level types.
+	functions := make([]functionModel, 0, len(framework.Functions))
+	for _, fn := range EmittableFunctions(framework) {
+		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
+	}
+
+	imports := buildFunctionsImports(functions, usedImports)
+	return functionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
+}
+
+// EmittableFunctions returns the plain C functions that EmitFunctions emits as Go
+// wrappers for framework, in declaration order, after applying the same skip and
+// de-duplication rules (inline/variadic/unavailable/builtin/UPP/va_list/by-value
+// unknown filters, plus collision with package-level type names). The idiomatic
+// library layer uses this so it only ever wraps raw functions that actually exist.
+func EmittableFunctions(framework *macosplatformmetadata.FrameworkMeta) []macosplatformmetadata.Function {
+	// Names of package-level Go types the function names must not collide with.
 	pkgTypeNames := make(map[string]bool)
 	for n := range framework.Structs {
 		pkgTypeNames[naming.GoTypeName(n)] = true
@@ -40,8 +55,7 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 	}
 
 	seen := make(map[string]bool)
-	functions := make([]functionModel, 0, len(framework.Functions))
-
+	out := make([]macosplatformmetadata.Function, 0, len(framework.Functions))
 	for _, fn := range framework.Functions {
 		if fn.IsInline || fn.IsVariadic || fn.Availability.IsUnavailable ||
 			strings.HasPrefix(fn.Name, "__builtin") || isUPPFunction(fn.Name) {
@@ -55,11 +69,9 @@ func buildFunctionsModel(pkgName, packageName string, framework *macosplatformme
 			continue
 		}
 		seen[goName] = true
-		functions = append(functions, buildFunctionModel(fn, framework.Framework, packageName, ctx, m, usedImports))
+		out = append(out, fn)
 	}
-
-	imports := buildFunctionsImports(functions, usedImports)
-	return functionsFileModel{PkgName: pkgName, FwLower: packageName, Imports: imports, Functions: functions}
+	return out
 }
 
 // buildFunctionModel builds the model for a single C function → Go wrapper.

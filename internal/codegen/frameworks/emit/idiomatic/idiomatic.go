@@ -142,6 +142,14 @@ func EmitFrameworkWrappers(
 	); err != nil {
 		return fmt.Errorf("emit generic function wrappers: %w", err)
 	}
+	// Re-export raw enum types/constants referenced by the generated package so
+	// callers never need the raw import to name an enum or use its constants.
+	// Runs last: it scans the files written above.
+	if err := emitEnums(
+		outDir, pkgName, rawPkgAlias, rawPkgPath, fw, takenNames,
+	); err != nil {
+		return fmt.Errorf("emit enums: %w", err)
+	}
 	return emitDocGo(outDir, pkgName, fw)
 }
 

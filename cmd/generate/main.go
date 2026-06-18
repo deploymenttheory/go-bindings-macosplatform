@@ -93,28 +93,41 @@ Run 'generate <sub-command> -help' for flags.
 
 func runIdiomatic(args []string) {
 	fs := flag.NewFlagSet("idiomatic", flag.ExitOnError)
-	framework := fs.String("framework", "", `Framework(s) to emit: name, comma-separated list, or "all" (default: all)`)
+	framework := fs.String("framework", "", `Framework/library(s) to emit: name, comma-separated list, or "all" (default: all)`)
 	metaDir   := fs.String("metadata-dir", "./metadata", "Directory containing .gometa.json files")
 	out       := fs.String("out", "./opinionated/idiomatic/framework", "Output directory for idiomatic ObjC-framework packages")
+	librariesOut := fs.String("libraries-out", "./opinionated/idiomatic/libraries", "Output directory for idiomatic CGo C-library packages")
 	verbose   := fs.Bool("v", false, "Verbose output")
 	_ = fs.Parse(args)
 
-	reg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
-
-	var frameworks []string
+	var names []string
 	if *framework != "" && !strings.EqualFold(*framework, "all") {
-		frameworks = splitTrimmed(*framework, ",")
+		names = splitTrimmed(*framework, ",")
 	}
 
+	// ObjC frameworks → opinionated/idiomatic/framework (purego pipeline).
+	reg := loadPureRegistry(*metaDir, defaultFrameworksModulePrefix, defaultLibrariesModulePrefix)
 	if err := purepipeline.GenerateIdiomatic(purepipeline.IdiomaticConfig{
 		Registry:   reg,
 		OutDir:     *out,
-		Frameworks: frameworks,
+		Frameworks: names,
 		Verbose:    *verbose,
 	}); err != nil {
-		log.Fatalf("idiomatic: %v", err)
+		log.Fatalf("idiomatic (frameworks): %v", err)
 	}
-	log.Printf("idiomatic: done → %s", *out)
+	log.Printf("idiomatic frameworks: done → %s", *out)
+
+	// CGo C libraries → opinionated/idiomatic/libraries (CGo pipeline).
+	cgoReg := loadCGORegistry(*metaDir, defaultLibrariesModulePrefix)
+	if err := cgopipeline.GenerateIdiomaticLibraries(cgopipeline.IdiomaticConfig{
+		Registry:  cgoReg,
+		OutDir:    *librariesOut,
+		Libraries: names,
+		Verbose:   *verbose,
+	}); err != nil {
+		log.Fatalf("idiomatic (libraries): %v", err)
+	}
+	log.Printf("idiomatic libraries: done → %s", *librariesOut)
 }
 
 // ---------------------------------------------------------------------------

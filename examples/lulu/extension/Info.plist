@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Info.plist for the LuLu network system extension.
+
+  The system instantiates NSExtensionPrincipalClass to filter flows. Our Go
+  daemon registers an Objective-C class of this exact name at startup
+  (extension.ProviderClassName = "LuLuFilterDataProvider"), subclassing
+  NEFilterDataProvider. The extension binary (cmd/luludaemon) must be embedded in
+  the host app at Contents/Library/SystemExtensions/<bundleid>.systemextension
+  and code-signed.
+-->
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.lulu.extension</string>
+    <key>CFBundleName</key>
+    <string>LuLuExtension</string>
+    <key>CFBundlePackageType</key>
+    <string>SYSX</string>
+    <key>CFBundleExecutable</key>
+    <string>luludaemon</string>
+    <key>NSSystemExtensionUsageDescription</key>
+    <string>LuLu filters network traffic to enforce your firewall rules.</string>
+    <key>NSExtension</key>
+    <dict>
+        <key>NSExtensionPointIdentifier</key>
+        <string>com.apple.networkextension.filter-data</string>
+        <key>NSExtensionPrincipalClass</key>
+        <string>LuLuFilterDataProvider</string>
+    </dict>
+</dict>
+</plist>

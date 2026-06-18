@@ -174,7 +174,7 @@ func EmitSpecs(w io.Writer, pkgName, rawImportPath string, framework *macosplatf
 
 	extraImports := make(map[string]string)
 	if needsFoundation {
-		extraImports["foundation"] = "github.com/deploymenttheory/go-bindings-macosplatform/frameworks/foundation"
+		extraImports["foundation"] = "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	}
 	writeOpinionatedHeader(w, pkgName, rawImportPath, extraImports, usedImports, needsObjc)
 	_, err := w.Write(body.Bytes())
