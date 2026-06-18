@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.4.0...v0.5.0) (2026-06-18)
+
+
+### Features
+
+* Added Idiomatic CGo libraries ([fce2d31](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/fce2d31f21f5382bdbccc2f1f67e538f02810f62))
+* canonicalize generated Go via gofmt; emit concrete idiomatic enums ([#22](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/22)) ([63b5d5e](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/63b5d5e4d7b6ecafce5819e6cdc13da9f1d16fb8))
+* enhance idiomatic generation and library handling ([a7c5f66](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/a7c5f66e0e28f98df1d74daf6ef5fbf65b0805c7))
+* localize enum types in idiomatic signatures ([#25](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/25)) ([c89b8c7](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/c89b8c753a1046db50c21ea318199fc811091afc))
+* refactor(codegen): fully templatize the idiomatic emitter (method family, class wrappers, function wrappers) ([#24](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/24)) ([509bf9a](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/509bf9a4acf5e8a2bbf2c7f2f8e5025820c0b267))
+* templatize idiomatic constants/functions/constructor/with-setter renderers ([#23](https://github.com/deploymenttheory/go-bindings-macosplatform/issues/23)) ([0f7a78e](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/0f7a78e914c88a40754be751963cdb7896e33039))
+
+
+### Bug Fixes
+
+* remove OpenTelemetry dependency and update CGo bindings ([f705d9e](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/f705d9e1289cf6ff6e63ab88226049cd4df3e0c9))
+* removed otel from macOS library bindings ([4a465fc](https://github.com/deploymenttheory/go-bindings-macosplatform/commit/4a465fc750e6a0b31f9d45d5d6c53cceea27c038))
+
 ## [0.4.0](https://github.com/deploymenttheory/go-bindings-macosplatform/compare/v0.3.1...v0.4.0) (2026-06-17)
 
 
